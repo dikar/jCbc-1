@@ -365,10 +365,7 @@ extern int solve_whs(CbcModel *model, OsiClpSolverInterface *solver, std::string
 extern int getNumIntegers(OsiClpSolverInterface *solver);
 extern void writeLp1(CbcModel *model, const char *name, double epsilon=1e-5, int decimals=5 );
 extern void writeMps1(CbcModel *model, const char *name, int 	formatType = 0, int numberAcross = 2,double objSense = 0.0);
-extern double minCoeff(CbcModel *model);
-extern double maxCoeff(CbcModel *model);
 extern void callCbc(std::string a,CbcModel *model);
-extern double minRHS(CbcModel *model);
 extern void setMaximumNodes(CbcModel *model, int value);
 extern void setNumberThreads(CbcModel * model,int a);
 extern void setThreadMode(CbcModel * model,int a);
@@ -2569,48 +2566,6 @@ SWIGEXPORT void JNICALL Java_src_jCbcJNI_par_1solve_1_1SWIG_19(JNIEnv *jenv, jcl
   (&arg3)->assign(arg3_pstr);
   jenv->ReleaseStringUTFChars(jarg3, arg3_pstr); 
   par_solve(arg1,arg2,arg3);
-}
-
-
-SWIGEXPORT jdouble JNICALL Java_src_jCbcJNI_minRHS(JNIEnv *jenv, jclass jcls, jlong jarg1) {
-  jdouble jresult = 0 ;
-  CbcModel *arg1 = (CbcModel *) 0 ;
-  double result;
-  
-  (void)jenv;
-  (void)jcls;
-  arg1 = *(CbcModel **)&jarg1; 
-  result = (double)minRHS(arg1);
-  jresult = (jdouble)result; 
-  return jresult;
-}
-
-
-SWIGEXPORT jdouble JNICALL Java_src_jCbcJNI_maxCoeff(JNIEnv *jenv, jclass jcls, jlong jarg1) {
-  jdouble jresult = 0 ;
-  CbcModel *arg1 = (CbcModel *) 0 ;
-  double result;
-  
-  (void)jenv;
-  (void)jcls;
-  arg1 = *(CbcModel **)&jarg1; 
-  result = (double)maxCoeff(arg1);
-  jresult = (jdouble)result; 
-  return jresult;
-}
-
-
-SWIGEXPORT jdouble JNICALL Java_src_jCbcJNI_minCoeff(JNIEnv *jenv, jclass jcls, jlong jarg1) {
-  jdouble jresult = 0 ;
-  CbcModel *arg1 = (CbcModel *) 0 ;
-  double result;
-  
-  (void)jenv;
-  (void)jcls;
-  arg1 = *(CbcModel **)&jarg1; 
-  result = (double)minCoeff(arg1);
-  jresult = (jdouble)result; 
-  return jresult;
 }
 
 

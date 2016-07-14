@@ -1506,42 +1506,6 @@ void writeLp1(CbcModel *model, const char *name, double epsilon=1e-5, int decima
 	model->solver()->writeLp(name,"lp",epsilon,10, decimals, 0.0, true);
 	}
 
-double minCoeff(CbcModel *model){
-	 double * minimumNegative = new double;
-	 double * maximumNegative = new double;
-	 double * minimumPositive = new double;
-	 double * maximumPositive = new double;
-	 model->solver()->statistics(*minimumNegative, *maximumNegative,
-           *minimumPositive,  *maximumPositive, 
-           0);
-	return min(fabs(*minimumNegative),fabs(*minimumPositive));
-	delete minimumNegative;
-	delete maximumNegative;
-	delete minimumPositive;
-	delete maximumPositive;
-}
-
-double maxCoeff(CbcModel *model){
-	 double * minimumNegative = new double;
-	 double * maximumNegative = new double;
-	 double * minimumPositive = new double;
-	 double * maximumPositive = new double;
-	 model->solver()->statistics(*minimumNegative, *maximumNegative,
-           *minimumPositive,  *maximumPositive, 
-           0);
-	return max(fabs(*minimumNegative),fabs(*minimumPositive));
-	
-	
-}
-
-double minRHS(CbcModel *model){
-	double * minRHS = new double;
-	model->solver()->getMinRHS(*minRHS);
-	return *minRHS;
-	
-}
-
-
 
 void callCbc(std::string a,CbcModel *model){
 	callCbc(a,*model);

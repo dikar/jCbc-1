@@ -505,18 +505,6 @@ public class jCbc {
     jCbcJNI.par_solve__SWIG_9(SWIGTYPE_p_CbcModel.getCPtr(model), SWIGTYPE_p_OsiClpSolverInterface.getCPtr(solver), s);
   }
 
-  public static double minRHS(SWIGTYPE_p_CbcModel model) {
-    return jCbcJNI.minRHS(SWIGTYPE_p_CbcModel.getCPtr(model));
-  }
-
-  public static double maxCoeff(SWIGTYPE_p_CbcModel model) {
-    return jCbcJNI.maxCoeff(SWIGTYPE_p_CbcModel.getCPtr(model));
-  }
-
-  public static double minCoeff(SWIGTYPE_p_CbcModel model) {
-    return jCbcJNI.minCoeff(SWIGTYPE_p_CbcModel.getCPtr(model));
-  }
-
   public static void cutoff(SWIGTYPE_p_CbcModel model, int n) {
     jCbcJNI.cutoff(SWIGTYPE_p_CbcModel.getCPtr(model), n);
   }

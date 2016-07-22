@@ -966,9 +966,9 @@ int solve_whs(CbcModel *model, OsiClpSolverInterface *solver, std::string names[
  
   	
   
-  int priority[solver1.getNumCols()];
-  for (int i=0;i<solver1.getNumIntegers();i++)
-		priority[i]=0;
+//  int priority[solver1.getNumCols()];
+//  for (int i=0;i<solver1.getNumIntegers();i++)
+//		priority[i]=0;
   
 if (intvars > 0){ 
 	
@@ -984,10 +984,10 @@ if (intvars > 0){
 						solver1.setColLower(i,values[k]);
 						solver1.setColUpper(i,values[k]);
 						
-						if (values[k]==1)
-							priority[i]=-1;
-						else
-							priority[i]=1;
+						//if (values[k]==1)
+						//	priority[i]=-1;
+						//else
+						//	priority[i]=1;
 					}
 					}
 				}
@@ -1069,7 +1069,7 @@ if (intvars > 0){
 if(whs){  
 	
 	//cout << "whs : " << solver1.getObjValue() << "\n";
-    model1.setHotstartSolution(sol0, priority);
+    model1.setHotstartSolution(sol0 /*, priority */);
 	model1.setBestSolution(sol0,solver1.getNumCols(),obj_val);
 	model1.setBestObjectiveValue(obj_val);
 	//model1.setMIPStart(A);
@@ -1212,9 +1212,9 @@ int solve_whs2(CbcModel *model, OsiClpSolverInterface *solver, std::string names
 	
   solver1->messageHandler()->setLogLevel(logLevel);
   
-  int priority[solver1->getNumCols()];
-  for (int i=0;i<solver1->getNumIntegers();i++)
-		priority[i]=0;
+ // int priority[solver1->getNumCols()];
+ // for (int i=0;i<solver1->getNumIntegers();i++)
+//		priority[i]=0;
   
   CoinWarmStart * B = NULL;
   
@@ -1232,10 +1232,10 @@ if (intvars > 0){
 						solver1->setColLower(i,values[k]);
 						solver1->setColUpper(i,values[k]);
 						
-						if (values[k]==1)
-							priority[i]=-1;
-						else
-							priority[i]=1;
+						//if (values[k]==1)
+						//	priority[i]=-1;
+						//else
+						//	priority[i]=1;
 					}
 					}
 				}
@@ -1299,7 +1299,7 @@ if (intvars > 0){
 	if(whs){  
 	
 	//model1.solver()->setWarmStart(B);
-    model1.setHotstartSolution(sol0, priority);
+    model1.setHotstartSolution(sol0 /*, priority*/);
 	model1.setBestSolution(sol0,solver1->getNumCols(),solver1->getObjValue());
 	model1.setBestObjectiveValue(solver1->getObjValue());
 	model1.setMIPStart(A);
@@ -2066,36 +2066,4 @@ try_solve_2_tol:
 			return 4;
 		}
 
-}
-
-void iis(OsiClpSolverInterface *solver){
-	
-	OsiClpSolverInterface *solver0 = new OsiClpSolverInterface(*solver);
-	int n = solver0->getNumRows();
-	int m = 0;
-	string temp;
-	double time = CoinCpuTime();
-	for (int i = 0 ; i < n ; i++){
-		temp = solver->getRowName(i);
-		OsiClpSolverInterface *solver1 = new OsiClpSolverInterface(*solver0);
-		solver1->setLogLevel(0);
-		const int *j = &m;
-		solver1->deleteRows(1,j);
-		solver1->initialSolve();
-		if (solver1->isProvenPrimalInfeasible()){
-			solver0->deleteRows(1,j);
-		}else{
-			m++;
-			//cout << temp << "\n";
-		}
-		delete j;
-		delete solver1;
-	}
-	double time1 = CoinCpuTime() - time;
-	solver0->writeLp("iis");
-	cout << "\nIIS is written to iis.lp. The size is " << solver0->getNumRows() << ". It took " << time1/60. << " minutes.\n\nList of constraints causing infeasibility:\n\n";
-	for (int j=0;j<solver0->getNumRows();j++)
-		cout << solver0->getRowName(j)+"\n";
-	delete solver0;
-	
 }

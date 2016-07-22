@@ -529,8 +529,4 @@ public class jCbc {
     return jCbcJNI.solve_unified__SWIG_4(SWIGTYPE_p_CbcModel.getCPtr(model), SWIGTYPE_p_OsiClpSolverInterface.getCPtr(solver));
   }
 
-  public static void iis(SWIGTYPE_p_OsiClpSolverInterface solver) {
-    jCbcJNI.iis(SWIGTYPE_p_OsiClpSolverInterface.getCPtr(solver));
-  }
-
 }

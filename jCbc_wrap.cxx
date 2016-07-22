@@ -372,7 +372,7 @@ extern void setThreadMode(CbcModel * model,int a);
 extern void par_solve(CbcModel *model, OsiClpSolverInterface *solver, std::string s, std::string names[] = NULL, int values[]= NULL,int intvars= 0,std::string names1[]= NULL, int values1[]= NULL,int intvars1= 0,std::string names2[]= NULL, int values2[]= NULL,int intvars2= 0);
 extern void cutoff(CbcModel *model, int n);
 extern int solve_unified(CbcModel *model, OsiClpSolverInterface *solver, std::string names[] = NULL, int values[] = NULL, int intvars = 0, int logLevel= 0 );
-extern void iis(OsiClpSolverInterface *solver);
+
 
 
 #include <stdexcept>
@@ -2685,16 +2685,6 @@ SWIGEXPORT jint JNICALL Java_src_jCbcJNI_solve_1unified_1_1SWIG_14(JNIEnv *jenv,
   result = (int)solve_unified(arg1,arg2);
   jresult = (jint)result; 
   return jresult;
-}
-
-
-SWIGEXPORT void JNICALL Java_src_jCbcJNI_iis(JNIEnv *jenv, jclass jcls, jlong jarg1) {
-  OsiClpSolverInterface *arg1 = (OsiClpSolverInterface *) 0 ;
-  
-  (void)jenv;
-  (void)jcls;
-  arg1 = *(OsiClpSolverInterface **)&jarg1; 
-  iis(arg1);
 }
 
 

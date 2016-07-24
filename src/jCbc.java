@@ -529,4 +529,16 @@ public class jCbc {
     return jCbcJNI.solve_unified__SWIG_4(SWIGTYPE_p_CbcModel.getCPtr(model), SWIGTYPE_p_OsiClpSolverInterface.getCPtr(solver));
   }
 
+  public static double getMinRHS(SWIGTYPE_p_OsiClpSolverInterface solver) {
+    return jCbcJNI.getMinRHS(SWIGTYPE_p_OsiClpSolverInterface.getCPtr(solver));
+  }
+
+  public static double getMinCoeff(SWIGTYPE_p_OsiClpSolverInterface solver) {
+    return jCbcJNI.getMinCoeff(SWIGTYPE_p_OsiClpSolverInterface.getCPtr(solver));
+  }
+
+  public static double getMaxCoeff(SWIGTYPE_p_OsiClpSolverInterface solver) {
+    return jCbcJNI.getMaxCoeff(SWIGTYPE_p_OsiClpSolverInterface.getCPtr(solver));
+  }
+
 }

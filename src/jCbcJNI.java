@@ -134,4 +134,7 @@ public class jCbcJNI {
   public final static native int solve_unified__SWIG_2(long jarg1, long jarg2, long jarg3, long jarg4);
   public final static native int solve_unified__SWIG_3(long jarg1, long jarg2, long jarg3);
   public final static native int solve_unified__SWIG_4(long jarg1, long jarg2);
+  public final static native double getMinRHS(long jarg1);
+  public final static native double getMinCoeff(long jarg1);
+  public final static native double getMaxCoeff(long jarg1);
 }

@@ -2067,3 +2067,91 @@ try_solve_2_tol:
 		}
 
 }
+
+double getMinRHS(OsiClpSolverInterface *solver)
+{
+  double minimumNegative = -COIN_DBL_MAX;
+  double maximumNegative = 0.0;
+  double minimumPositive = COIN_DBL_MAX;
+  double maximumPositive = 0.0;
+
+  const double * RHS = solver->getRightHandSide();
+  int numberRows = solver->getNumRows();
+  int i;
+  for (i = 0; i < numberRows; i++) {
+      double value = RHS[i];
+      if (value > 0.0) {
+	minimumPositive = CoinMin(minimumPositive, value);
+	maximumPositive = CoinMax(maximumPositive, value);
+      } else if (value < 0.0) {
+	minimumNegative = CoinMax(minimumNegative, value);
+	maximumNegative = CoinMin(maximumNegative, value);
+      }
+    }
+	return std::min(fabs(minimumNegative),fabs(minimumPositive));
+  }
+ 
+
+double getMinCoeff(OsiClpSolverInterface *solver) 
+{
+  double minimumNegative = -COIN_DBL_MAX;
+  double maximumNegative = 0.0;
+  double minimumPositive = COIN_DBL_MAX;
+  double maximumPositive = 0.0;
+  // get matrix data pointers
+  const double * elementByColumn = solver->getMatrixByCol()->getElements();
+  const CoinBigIndex * columnStart = solver->getMatrixByCol()->getVectorStarts();
+  const int * columnLength = solver->getMatrixByCol()->getVectorLengths();
+  const int * row = solver->getMatrixByCol()->getIndices();
+  int numberColumns = solver->getNumCols();
+  int numberRows = solver->getNumRows();
+  int numberElements = solver->getMatrixByCol()->getNumElements();
+  int i;
+  for (i = 0; i < numberColumns; i++) {
+    CoinBigIndex j;
+    for (j = columnStart[i]; j < columnStart[i] + columnLength[i]; j++) {
+      double value = elementByColumn[j];
+      if (value > 0.0) {
+	minimumPositive = CoinMin(minimumPositive, value);
+	maximumPositive = CoinMax(maximumPositive, value);
+      } else if (value < 0.0) {
+	minimumNegative = CoinMax(minimumNegative, value);
+	maximumNegative = CoinMin(maximumNegative, value);
+      }
+    }
+  }
+  return std::min(fabs(minimumNegative),fabs(minimumPositive));
+  
+}
+
+double getMaxCoeff(OsiClpSolverInterface *solver) 
+{
+  double minimumNegative = -COIN_DBL_MAX;
+  double maximumNegative = 0.0;
+  double minimumPositive = COIN_DBL_MAX;
+  double maximumPositive = 0.0;
+  // get matrix data pointers
+  const double * elementByColumn = solver->getMatrixByCol()->getElements();
+  const CoinBigIndex * columnStart = solver->getMatrixByCol()->getVectorStarts();
+  const int * columnLength = solver->getMatrixByCol()->getVectorLengths();
+  const int * row = solver->getMatrixByCol()->getIndices();
+  int numberColumns = solver->getNumCols();
+  int numberRows = solver->getNumRows();
+  int numberElements = solver->getMatrixByCol()->getNumElements();
+  int i;
+  for (i = 0; i < numberColumns; i++) {
+    CoinBigIndex j;
+    for (j = columnStart[i]; j < columnStart[i] + columnLength[i]; j++) {
+      double value = elementByColumn[j];
+      if (value > 0.0) {
+	minimumPositive = CoinMin(minimumPositive, value);
+	maximumPositive = CoinMax(maximumPositive, value);
+      } else if (value < 0.0) {
+	minimumNegative = CoinMax(minimumNegative, value);
+	maximumNegative = CoinMin(maximumNegative, value);
+      }
+    }
+  }
+  return std::max(fabs(maximumNegative),fabs(maximumPositive));
+  
+}

@@ -372,6 +372,9 @@ extern void setThreadMode(CbcModel * model,int a);
 extern void par_solve(CbcModel *model, OsiClpSolverInterface *solver, std::string s, std::string names[] = NULL, int values[]= NULL,int intvars= 0,std::string names1[]= NULL, int values1[]= NULL,int intvars1= 0,std::string names2[]= NULL, int values2[]= NULL,int intvars2= 0);
 extern void cutoff(CbcModel *model, int n);
 extern int solve_unified(CbcModel *model, OsiClpSolverInterface *solver, std::string names[] = NULL, int values[] = NULL, int intvars = 0, int logLevel= 0 );
+extern double getMinRHS(OsiClpSolverInterface *solver);
+extern double getMinCoeff(OsiClpSolverInterface *solver);
+extern double getMaxCoeff(OsiClpSolverInterface *solver);
 
 
 
@@ -2684,6 +2687,48 @@ SWIGEXPORT jint JNICALL Java_src_jCbcJNI_solve_1unified_1_1SWIG_14(JNIEnv *jenv,
   arg2 = *(OsiClpSolverInterface **)&jarg2; 
   result = (int)solve_unified(arg1,arg2);
   jresult = (jint)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT jdouble JNICALL Java_src_jCbcJNI_getMinRHS(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+  jdouble jresult = 0 ;
+  OsiClpSolverInterface *arg1 = (OsiClpSolverInterface *) 0 ;
+  double result;
+  
+  (void)jenv;
+  (void)jcls;
+  arg1 = *(OsiClpSolverInterface **)&jarg1; 
+  result = (double)getMinRHS(arg1);
+  jresult = (jdouble)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT jdouble JNICALL Java_src_jCbcJNI_getMinCoeff(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+  jdouble jresult = 0 ;
+  OsiClpSolverInterface *arg1 = (OsiClpSolverInterface *) 0 ;
+  double result;
+  
+  (void)jenv;
+  (void)jcls;
+  arg1 = *(OsiClpSolverInterface **)&jarg1; 
+  result = (double)getMinCoeff(arg1);
+  jresult = (jdouble)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT jdouble JNICALL Java_src_jCbcJNI_getMaxCoeff(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+  jdouble jresult = 0 ;
+  OsiClpSolverInterface *arg1 = (OsiClpSolverInterface *) 0 ;
+  double result;
+  
+  (void)jenv;
+  (void)jcls;
+  arg1 = *(OsiClpSolverInterface **)&jarg1; 
+  result = (double)getMaxCoeff(arg1);
+  jresult = (jdouble)result; 
   return jresult;
 }
 
